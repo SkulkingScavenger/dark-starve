@@ -126,7 +126,8 @@ void KeyboardMovement(){
 			rotation.z = 0;
 		}
 	}
-	transform.eulerAngles = rotation;//transform.Rotate(rotation);
+	//transform.eulerAngles = rotation;
+	transform.Rotate(rotation);
 	GetComponent<Rigidbody2D>().velocity = new Vector2(speedX,speedY);
 }
 
