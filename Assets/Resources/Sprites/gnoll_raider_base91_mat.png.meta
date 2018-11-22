@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: 2d9aee630a38da34282e0fde253fd839
+guid: cc15d4484c60bc242b0415ba5a24d628
 TextureImporter:
   fileIDToRecycleName:
-    21300000: gnoll_raider_base01_0
-    21300002: gnoll_raider_base01_1
-    21300004: gnoll_raider_base01_2
-    21300006: gnoll_raider_base01_3
-    21300008: gnoll_raider_base01_4
+    21300000: gnoll_raider_base91_mat_0
+    21300002: gnoll_raider_base91_mat_1
+    21300004: gnoll_raider_base91_mat_2
+    21300006: gnoll_raider_base91_mat_3
+    21300008: gnoll_raider_base91_mat_4
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
-    sRGBTexture: 1
+    enableMipMap: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -21,9 +21,9 @@ TextureImporter:
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
-    convertToNormalMap: 0
+    convertToNormalMap: 1
     externalNormalMap: 0
-    heightScale: 0.25
+    heightScale: 0
     normalMapFilter: 0
   isReadable: 0
   streamingMipmaps: 0
@@ -42,7 +42,7 @@ TextureImporter:
     wrapU: 1
     wrapV: 1
     wrapW: 1
-  nPOTScale: 0
+  nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
@@ -50,13 +50,13 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaUsage: 0
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 1
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gnoll_raider_base01_0
+      name: gnoll_raider_base91_mat_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 0
         y: 0
-        width: 55
-        height: 63
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,19 +114,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75363351a26b54540bb8a02a31dfe256
+      spriteID: 5f4522f3f8717254bb1afad7dc101add
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gnoll_raider_base01_1
+      name: gnoll_raider_base91_mat_1
       rect:
         serializedVersion: 2
-        x: 72
+        x: 64
         y: 0
-        width: 55
-        height: 63
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,19 +134,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 280b51b8bb05e8c44b45dbb9998ac1c2
+      spriteID: b009790ded52d82409ad88cac63b06b6
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gnoll_raider_base01_2
+      name: gnoll_raider_base91_mat_2
       rect:
         serializedVersion: 2
-        x: 136
+        x: 128
         y: 0
-        width: 53
-        height: 63
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,19 +154,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af789704e869aff458e8b59d175b58c2
+      spriteID: 160ba2f5c13d8524393c2a99fef88456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gnoll_raider_base01_3
+      name: gnoll_raider_base91_mat_3
       rect:
         serializedVersion: 2
-        x: 200
+        x: 192
         y: 0
-        width: 52
-        height: 63
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,13 +174,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88b9a1d40358e69478c752c50ca26306
+      spriteID: 1bfec108d854077428d81ed880db4edb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gnoll_raider_base01_4
+      name: gnoll_raider_base91_mat_4
       rect:
         serializedVersion: 2
         x: 256
@@ -194,7 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c98ad27606c34143b1487f05c6b4705
+      spriteID: 66d2e6b5cb6b2c940b25e4e00ba596fe
       vertices: []
       indices: 
       edges: []
@@ -202,7 +202,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 09bc2f0e8c510b04f831da18f38cda4e
     vertices: []
     indices: 
     edges: []

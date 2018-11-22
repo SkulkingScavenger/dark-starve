@@ -7,17 +7,24 @@ public class Player : NetworkBehaviour {
 
 	float speedX = 0;
 	float speedY = 0;
-	float frictionForceX = 50f;
-	float frictionForceY = 50f;
-	float spd = 5f;
+	float frictionForceX = 100f;
+	float frictionForceY = 100f;
+	float baseSpeed = 100f;
+	float faceDirection = 0.0f;
+	float movementDirection = 0.0f;
+
+	float chargeTimeRaw;
+	public Camera mainCamera;
 
 	// Use this for initialization
 	void Start () {
-		
+		Debug.Log(baseSpeed*Mathf.Cos(0));
+		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 	
-	// Update is called once per frame
+	// Update is called once per framed
 	void Update () {
+		SetFaceDirection();
 		// if (Input.GetAxis("Horizontal")!=0){
 		// 	float x = transform.position.x;
 		// 	x += 0.5f * Input.GetAxis("Horizontal");
@@ -83,51 +90,83 @@ public class Player : NetworkBehaviour {
 // 	GetComponent<Rigidbody2D>().velocity = new Vector2(speedX,speedY);
 // }
 
+void SetFaceDirection(){
+	Camera cam = Camera.main;//GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+	Vector3 mouseCoordinates = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.nearClipPlane));
+	Vector2 start = new Vector2(transform.position.x,transform.position.y);
+	Vector2 end = new Vector2(mouseCoordinates.x,mouseCoordinates.y);
+	float d = Vector2.Distance(start,end);
+
+	if(d > 0.1){
+		float angle = Mathf.Asin((end.y-start.y)/d);
+		if (start.y <= end.y && start.x <= end.x){
+			//nothing
+		}else if (start.y <= end.y && start.x > end.x){
+			angle = Mathf.PI - angle; 
+		}else if (start.y > end.y && start.x > end.x){
+			angle = Mathf.PI - angle; 
+		}else if (start.y > end.y && start.x <= end.x){
+			angle = 2*Mathf.PI + angle; 
+		}
+
+	faceDirection = angle/(Mathf.PI/180);
+	transform.eulerAngles = new Vector3(0,0,faceDirection);
+	//transform.Rotate(rotation);
+	}
+}
+
 void KeyboardMovement(){
-	float speedInitialX = speedX;
-	float speedInitialY = speedY;
-	if(Input.GetAxis("Horizontal") != 0){
-		speedX = spd*Mathf.Sign(Input.GetAxis("Horizontal") * Time.deltaTime);
+	float inputX = Input.GetAxis("Horizontal");
+	float inputY = Input.GetAxis("Vertical");
+	
+	if(inputX > 0){
+		if(inputY < 0){
+			movementDirection = 315;
+		}else if(inputY > 0){
+			movementDirection = 45;
+		}else{
+			movementDirection = 0;
+		}
+	}else if(inputX < 0){
+		if(inputY < 0){
+			movementDirection = 225;
+		}else if(inputY > 0){
+			movementDirection = 135;
+		}else{
+			movementDirection = 180;
+		}
 	}else{
-		speedX -=  Mathf.Sign(speedX) * frictionForceX * Time.deltaTime;
-		if(Mathf.Sign(speedX) != Mathf.Sign(speedInitialX)){
+		if(inputY < 0){
+			movementDirection = 270;
+		}else if(inputY > 0){
+			movementDirection = 90;
+		}
+	}
+
+	float xspd,yspd = baseSpeed;
+	float angle = movementDirection*(Mathf.PI/180);
+	xspd = baseSpeed*Mathf.Cos(angle);
+	yspd = baseSpeed*Mathf.Sin(angle);
+
+	if(inputX != 0){
+		speedX = xspd * Time.deltaTime;
+	}else{
+		if(Mathf.Abs(speedX) - (frictionForceX * Time.deltaTime) < 0){
 			speedX = 0;
+		}else{
+			speedX = Mathf.Sign(speedX)*(Mathf.Abs(speedX) - (frictionForceX * Time.deltaTime));
 		}
 	}
-	if(Input.GetAxis("Vertical") != 0){
-		speedY = spd*Mathf.Sign(Input.GetAxis("Vertical") * Time.deltaTime);
+	if(inputY != 0){
+		speedY = yspd * Time.deltaTime;
 	}else{
-		speedY -=  Mathf.Sign(speedY) * frictionForceY * Time.deltaTime;
-		if(Mathf.Sign(speedY) != Mathf.Sign(speedInitialY)){
+		if(Mathf.Abs(speedY) - (frictionForceY * Time.deltaTime) < 0){
 			speedY = 0;
+		}else{
+			speedY = Mathf.Sign(speedY)*(Mathf.Abs(speedY) - (frictionForceY * Time.deltaTime));
 		}
 	}
-	Vector3 rotation = transform.eulerAngles;
-	if(speedX > 0){
-		if(speedY < 0){
-			rotation.z = 225;
-		}else if(speedY > 0){
-			rotation.z = 315;
-		}else{
-			rotation.z = 270;
-		}
-	}else if(speedX < 0){
-		if(speedY < 0){
-			rotation.z = 135;
-		}else if(speedY > 0){
-			rotation.z = 45;
-		}else{
-			rotation.z = 90;
-		}
-	}else{
-		if(speedY < 0){
-			rotation.z = 180;
-		}else if(speedY > 0){
-			rotation.z = 0;
-		}
-	}
-	//transform.eulerAngles = rotation;
-	transform.Rotate(rotation);
+	
 	GetComponent<Rigidbody2D>().velocity = new Vector2(speedX,speedY);
 }
 
@@ -135,7 +174,8 @@ void Action(){
 	if(Input.GetAxis("Fire1") != 0){
 		GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Projectiles/bumbel"));
 		bumbel.GetComponent<Bumbel>().spd = 5;
-		bumbel.transform.eulerAngles = transform.eulerAngles;
+		bumbel.GetComponent<Bumbel>().dir = faceDirection;
+		bumbel.transform.position = transform.position;
 	}
 }
 
