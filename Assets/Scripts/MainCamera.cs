@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour {
 
-	GameObject player = null;
+	public GameObject player = null;
 
 	// Use this for initialization
 	void Awake () {

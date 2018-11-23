@@ -7,9 +7,9 @@ public class Player : NetworkBehaviour {
 
 	float speedX = 0;
 	float speedY = 0;
-	float frictionForceX = 100f;
-	float frictionForceY = 100f;
-	float baseSpeed = 100f;
+	float frictionForceX = 200f;
+	float frictionForceY = 200f;
+	float baseSpeed = 200f;
 	float faceDirection = 0.0f;
 	float movementDirection = 0.0f;
 
@@ -20,6 +20,8 @@ public class Player : NetworkBehaviour {
 	void Start () {
 		Debug.Log(baseSpeed*Mathf.Cos(0));
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+		mainCamera.GetComponent<MainCamera>().player = gameObject;
+		transform.position = new Vector3(transform.position.x,transform.position.y,-1);
 	}
 	
 	// Update is called once per framed
