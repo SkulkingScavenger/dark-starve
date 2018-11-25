@@ -15,22 +15,28 @@ public class Player : NetworkBehaviour {
 
 	float chargeTimeRaw;
 	public Camera mainCamera;
-	public Inventory inventory = new Inventory(12);
+	public Inventory backpack = new Inventory(12);
+	public Inventory quickSlot = new Inventory(6);
+	public Inventory weaponSlot = new Inventory(1);
+	public Inventory lightSlot = new Inventory(1);
+	public Inventory trinketSlot = new Inventory(4);
 	public UnderCursorDisplay cursorHandler;
 	// Use this for initialization
 	void Start () {
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		mainCamera.GetComponent<MainCamera>().player = gameObject;
 		transform.position = new Vector3(transform.position.x,transform.position.y,-1);
-		Item bumbel = new Item();
+
+		Item bumbel;
+		bumbel = new Item();
 		bumbel.itemId = 0;
-		inventory.Add(bumbel);
+		backpack.Add(bumbel);
 
 		bumbel = new Item();
 		bumbel.itemId = 1;
-		inventory.Add(bumbel);
+		backpack.Add(bumbel);
 
-		GameObject.FindGameObjectWithTag("Canvas").GetComponent<UserInterface>().playerInventory = inventory;
+		GameObject.FindGameObjectWithTag("Canvas").GetComponent<UserInterface>().Init(this);
 		cursorHandler = GameObject.FindGameObjectWithTag("UnderCursorDisplay").GetComponent<UnderCursorDisplay>();
 	}
 	

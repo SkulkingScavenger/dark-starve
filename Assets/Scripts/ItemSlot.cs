@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 	public int index = 0;
 	public UserInterface root = null;
+	public Inventory targetInventory = null;
 	GameObject img;
 
 	void Awake(){
@@ -14,8 +15,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 	}
 
 	void Update(){
-		if(root.playerInventory.Get(index) != null){
-			ItemPrototype proto = root.playerInventory.Get(index).Prototype();
+		if(targetInventory.Get(index) != null){
+			ItemPrototype proto = targetInventory.Get(index).Prototype();
 			img.GetComponent<Image>().sprite = root.itemIcons[proto.iconIndex];
 		}else{
 			img.GetComponent<Image>().sprite = root.nullIcon;
@@ -25,16 +26,16 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 	public void OnPointerClick(PointerEventData eventData){
 		if (eventData.button == PointerEventData.InputButton.Left){
 			UnderCursorDisplay cursorHandler = root.underCursorDisplay.GetComponent<UnderCursorDisplay>();
-			if(root.playerInventory.Get(index) != null){
+			if(targetInventory.Get(index) != null){
 				if(cursorHandler.heldItem == null){
-					cursorHandler.heldItem = root.playerInventory.Get(index);
-					root.playerInventory.Add(null,index);
+					cursorHandler.heldItem = targetInventory.Get(index);
+					targetInventory.Add(null,index);
 				}else{
-					cursorHandler.heldItem = root.playerInventory.Add(cursorHandler.heldItem,index);
+					cursorHandler.heldItem = targetInventory.Add(cursorHandler.heldItem,index);
 				}
 			}else{
 				if(cursorHandler.heldItem != null){
-					cursorHandler.heldItem = root.playerInventory.Add(cursorHandler.heldItem,index);
+					cursorHandler.heldItem = targetInventory.Add(cursorHandler.heldItem,index);
 				}
 			}
 		}else if (eventData.button == PointerEventData.InputButton.Right){

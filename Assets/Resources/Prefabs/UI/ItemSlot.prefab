@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114408277329340028}
   - component: {fileID: 114197327819276730}
   m_Layer: 5
-  m_Name: UIPackSlot
+  m_Name: ItemSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fc93f7237d86f4cb8509b200ffe0b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   root: {fileID: 0}
 --- !u!114 &114356150595344038
 MonoBehaviour:
