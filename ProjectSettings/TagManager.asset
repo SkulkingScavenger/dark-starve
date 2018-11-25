@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Visibility Camera
+  - Canvas
+  - UnderCursorDisplay
   layers:
   - Default
   - TransparentFX

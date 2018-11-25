@@ -6,7 +6,7 @@ public class Inventory {
 	public int maxSize;
 	public List<Item> contents = new List<Item>();
 
-	Inventory(int max){
+	public Inventory(int max){
 		maxSize = max;
 		for(int i=0;i<maxSize;i++){
 			contents.Add(null);
@@ -18,9 +18,9 @@ public class Inventory {
 		List<int> stackIndices = FindById(item.itemId);
 		for(int i=0;i<stackIndices.Count; i++){
 			Get(i).stackCount += item.stackCount;
-			if(Get(i).stackCount > item.maxStackCount){
-				item.stackCount = Get(i).stackCount - item.maxStackCount;
-				Get(i).stackCount = item.maxStackCount;
+			if(Get(i).stackCount > item.Prototype().maxStackCount){
+				item.stackCount = Get(i).stackCount - item.Prototype().maxStackCount;
+				Get(i).stackCount = item.Prototype().maxStackCount;
 			}else{
 				item.stackCount = 0;
 			}
@@ -43,25 +43,31 @@ public class Inventory {
 
 	public Item Add(Item item, int index){
 		Item output;
-		if(contents[index] != null){
-			if(contents[index].itemId == item.itemId){
-				contents[index].stackCount += item.stackCount;
-				if(contents[index].stackCount > contents[index].maxStackCount){
-					output = new Item();
-					output.itemId = item.itemId;
-					output.stackCount = contents[index].stackCount - contents[index].maxStackCount;
-					contents[index].stackCount = contents[index].maxStackCount;
+		if(item == null){
+			output = contents[index];
+			contents[index] = null;
+		}else{
+			if(contents[index] != null){
+				if(contents[index].itemId == item.itemId){
+					contents[index].stackCount += item.stackCount;
+					if(contents[index].stackCount > contents[index].Prototype().maxStackCount){
+						output = new Item();
+						output.itemId = item.itemId;
+						output.stackCount = contents[index].stackCount - contents[index].Prototype().maxStackCount;
+						contents[index].stackCount = contents[index].Prototype().maxStackCount;
+					}else{
+						output = null;
+					}
 				}else{
-					output = null;
+					output = contents[index];
+					contents[index] = item;
 				}
 			}else{
-				output = contents[index];
 				contents[index] = item;
+				output = null;
 			}
-		}else{
-			contents[index] = item;
-			output = null;
 		}
+		
 		return output;
 	}
 
@@ -72,7 +78,7 @@ public class Inventory {
 	List<int> FindById(int id){
 		List<int> output = new List<int>();
 		for(int i=0;i<maxSize;i++){
-			if(Get(i).itemId == id){
+			if(Get(i) != null && Get(i).itemId == id){
 				output.Add(i);
 			}
 		}
@@ -83,5 +89,15 @@ public class Inventory {
 public class Item {
 	public int itemId = 0;
 	public int stackCount = 1;
-	public int maxStackCount = 20;
+
+	public ItemPrototype Prototype(){
+		return ItemPrototypeManager.Instance.prototypes[itemId];
+	}
+}
+
+public class ItemPrototype {
+	public int maxStackCount = 1;
+	public int iconIndex = 0;
+	public string name = "";
+	public bool craftable = false;
 }

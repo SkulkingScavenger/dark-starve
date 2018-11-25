@@ -15,13 +15,23 @@ public class Player : NetworkBehaviour {
 
 	float chargeTimeRaw;
 	public Camera mainCamera;
-
+	public Inventory inventory = new Inventory(12);
+	public UnderCursorDisplay cursorHandler;
 	// Use this for initialization
 	void Start () {
-		Debug.Log(baseSpeed*Mathf.Cos(0));
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		mainCamera.GetComponent<MainCamera>().player = gameObject;
 		transform.position = new Vector3(transform.position.x,transform.position.y,-1);
+		Item bumbel = new Item();
+		bumbel.itemId = 0;
+		inventory.Add(bumbel);
+
+		bumbel = new Item();
+		bumbel.itemId = 1;
+		inventory.Add(bumbel);
+
+		GameObject.FindGameObjectWithTag("Canvas").GetComponent<UserInterface>().playerInventory = inventory;
+		cursorHandler = GameObject.FindGameObjectWithTag("UnderCursorDisplay").GetComponent<UnderCursorDisplay>();
 	}
 	
 	// Update is called once per framed
@@ -173,7 +183,7 @@ void KeyboardMovement(){
 }
 
 void Action(){
-	if(Input.GetAxis("Fire1") != 0){
+	if(Input.GetAxis("Fire1") != 0 && !cursorHandler.overUI){
 		GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Projectiles/bumbel"));
 		bumbel.GetComponent<Bumbel>().spd = 5;
 		bumbel.GetComponent<Bumbel>().dir = faceDirection;

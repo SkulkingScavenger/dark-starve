@@ -8,9 +8,9 @@ public class TileControl : MonoBehaviour {
 		void Awake(){
 		for(int i = 0; i < width; i++){
 			for(int j = 0; j < height; j++){
-			GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Terrain Tile"));
-			bumbel.transform.position = new Vector3(i - width/2, j - height/2, 0);
-		}
+				GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Terrain Tile"));
+				bumbel.transform.position = new Vector3(i - width/2, j - height/2, 0);
+			}
 		}
 	}
 

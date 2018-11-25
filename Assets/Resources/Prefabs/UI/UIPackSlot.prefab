@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222424987740195492}
   - component: {fileID: 114356150595344038}
   - component: {fileID: 114408277329340028}
+  - component: {fileID: 114197327819276730}
   m_Layer: 5
   m_Name: UIPackSlot
   m_TagString: Untagged
@@ -46,6 +47,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114197327819276730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1723667581719794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fc93f7237d86f4cb8509b200ffe0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 0}
 --- !u!114 &114356150595344038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,7 +176,7 @@ RectTransform:
   m_GameObject: {fileID: 1123906498843390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.66666, y: 0.66666, z: 1}
   m_Children: []
   m_Father: {fileID: 224643099407988072}
   m_RootOrder: 0
