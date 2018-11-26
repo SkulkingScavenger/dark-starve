@@ -7,7 +7,7 @@ public class UserInterface : MonoBehaviour {
 	int quickSlotCount = 6;
 	int packSlotCount = 12;
 	int equipSlotCount = 4;
-	bool isInventoryShown = false;
+	public bool isInventoryShown = false;
 	float inputPrevious = 0;
 	float input = 0;
 	int inventoryGridWidth = 6;
@@ -70,7 +70,7 @@ public class UserInterface : MonoBehaviour {
 		}
 	}
 
-	void ToggleInventory(){
+	public void ToggleInventory(){
 		if (isInventoryShown){
 			Destroy(inventoryOverlay);
 		}else{

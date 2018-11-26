@@ -93,6 +93,10 @@ public class Item {
 	public ItemPrototype Prototype(){
 		return ItemPrototypeManager.Instance.prototypes[itemId];
 	}
+
+	public void Use(){
+		Prototype().UseItem();
+	}
 }
 
 public class ItemPrototype {
@@ -100,4 +104,12 @@ public class ItemPrototype {
 	public int iconIndex = 0;
 	public string name = "";
 	public bool craftable = false;
+
+	public delegate void DelegateFunc();
+
+	public DelegateFunc use;
+
+	public void UseItem(){
+		use();
+	}
 }

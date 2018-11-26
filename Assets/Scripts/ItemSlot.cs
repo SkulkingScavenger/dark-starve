@@ -24,8 +24,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 	}
 
 	public void OnPointerClick(PointerEventData eventData){
+		UnderCursorDisplay cursorHandler = root.underCursorDisplay.GetComponent<UnderCursorDisplay>();
 		if (eventData.button == PointerEventData.InputButton.Left){
-			UnderCursorDisplay cursorHandler = root.underCursorDisplay.GetComponent<UnderCursorDisplay>();
 			if(targetInventory.Get(index) != null){
 				if(cursorHandler.heldItem == null){
 					cursorHandler.heldItem = targetInventory.Get(index);
@@ -39,7 +39,18 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 				}
 			}
 		}else if (eventData.button == PointerEventData.InputButton.Right){
-			Debug.Log("Right click");
+			if(cursorHandler.heldItem != null){
+				if(root.isInventoryShown){
+					root.ToggleInventory();
+				}
+			}else{
+				if(root.isInventoryShown){
+					root.ToggleInventory();
+				}
+				if(targetInventory.Get(index) != null){
+					targetInventory.Get(index).Use();
+				}
+			}
 		}
 	}
 }
