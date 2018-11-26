@@ -26,7 +26,10 @@ public class ItemPrototypeManager : MonoBehaviour{
 		bumbel.iconIndex = 0;
 		bumbel.maxStackCount = 10;
 		bumbel.craftable = true;
-		bumbel.use = new ItemPrototype.DelegateFunc(func);
+		bumbel.consumptionBehaviour = ConsumptionBehaviour.consumable;
+		bumbel.use = (Player p, Item item) => {
+			Debug.Log(p.backpack.maxSize);
+		};
 		prototypes.Add(bumbel);
 
 		bumbel = new ItemPrototype();
@@ -34,17 +37,17 @@ public class ItemPrototypeManager : MonoBehaviour{
 		bumbel.iconIndex = 1;
 		bumbel.maxStackCount = 10;
 		bumbel.craftable = true;
-		bumbel.use = new ItemPrototype.DelegateFunc(func2);
+		bumbel.consumptionBehaviour = ConsumptionBehaviour.consumable;
+		bumbel.use = (Player p, Item item) => {
+			Debug.Log(p.backpack.maxSize);
+		};
 		prototypes.Add(bumbel);
 
 	}
 
-	public void func(){
+	public void func(Player p, Item item){
 		Debug.Log("USED OIL");
 	}
 
-	public void func2(){
-		Debug.Log("USED WOOD");
-	}
 }
 

@@ -8,18 +8,25 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 	public int index = 0;
 	public UserInterface root = null;
 	public Inventory targetInventory = null;
-	GameObject img;
+	public string stackCountText = "";
+	GameObject imgObj;
+	GameObject textObj;
 
 	void Awake(){
-		img = transform.Find("Image").gameObject;
+		imgObj = transform.Find("Image").gameObject;
+		textObj = transform.Find("Text").gameObject;
 	}
 
 	void Update(){
 		if(targetInventory.Get(index) != null){
 			ItemPrototype proto = targetInventory.Get(index).Prototype();
-			img.GetComponent<Image>().sprite = root.itemIcons[proto.iconIndex];
+			imgObj.GetComponent<Image>().sprite = root.itemIcons[proto.iconIndex];
+			if(targetInventory.Get(index).Prototype().consumptionBehaviour != ConsumptionBehaviour.nonconsumable || targetInventory.Get(index).stackCount > 1){
+				textObj.GetComponent<Text>().text = targetInventory.Get(index).stackCount.ToString();
+			}
 		}else{
-			img.GetComponent<Image>().sprite = root.nullIcon;
+			imgObj.GetComponent<Image>().sprite = root.nullIcon;
+			textObj.GetComponent<Text>().text = "";
 		}
 	}
 
@@ -48,7 +55,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 					root.ToggleInventory();
 				}
 				if(targetInventory.Get(index) != null){
-					targetInventory.Get(index).Use();
+					targetInventory.Get(index).UseFromInventory(root.player,targetInventory,index);
 				}
 			}
 		}

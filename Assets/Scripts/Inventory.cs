@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ConsumptionBehaviour {consumable, nonconsumable, reloadable, charged};
+
 public class Inventory {
 	public int maxSize;
 	public List<Item> contents = new List<Item>();
@@ -89,13 +91,39 @@ public class Inventory {
 public class Item {
 	public int itemId = 0;
 	public int stackCount = 1;
+	public int ammunitionId = 0;
+
 
 	public ItemPrototype Prototype(){
 		return ItemPrototypeManager.Instance.prototypes[itemId];
 	}
 
-	public void Use(){
-		Prototype().UseItem();
+	public void UseOnObject(Player p, Item item){
+		Prototype().UseItem(p,item);
+	}
+
+	public void UseFromInventory(Player p, Inventory container, int index){
+		Prototype().UseItem(p,container.Get(index));
+
+		switch(Prototype().consumptionBehaviour){
+		case ConsumptionBehaviour.consumable:
+			stackCount--;
+			if(stackCount == 0){
+				container.Add(null, index);
+			}
+			break;
+		case ConsumptionBehaviour.nonconsumable:
+			break;
+		case ConsumptionBehaviour.reloadable:
+			stackCount--;
+			break;
+		case ConsumptionBehaviour.charged:
+			stackCount--;
+			if(stackCount == 0){
+				container.Add(null, index);
+			}
+			break;
+		}
 	}
 }
 
@@ -104,12 +132,13 @@ public class ItemPrototype {
 	public int iconIndex = 0;
 	public string name = "";
 	public bool craftable = false;
+	public ConsumptionBehaviour consumptionBehaviour = ConsumptionBehaviour.nonconsumable;
 
-	public delegate void DelegateFunc();
+	public delegate void DelegateFunc(Player p, Item item);
 
 	public DelegateFunc use;
 
-	public void UseItem(){
-		use();
+	public void UseItem(Player p, Item item){
+		use(p, item);
 	}
 }

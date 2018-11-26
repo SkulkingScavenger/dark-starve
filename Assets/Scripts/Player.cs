@@ -36,6 +36,10 @@ public class Player : NetworkBehaviour {
 		bumbel.itemId = 1;
 		backpack.Add(bumbel);
 
+		bumbel = new Item();
+		bumbel.itemId = 0;
+		backpack.Add(bumbel,2);
+
 		GameObject.FindGameObjectWithTag("Canvas").GetComponent<UserInterface>().Init(this);
 		cursorHandler = GameObject.FindGameObjectWithTag("UnderCursorDisplay").GetComponent<UnderCursorDisplay>();
 	}

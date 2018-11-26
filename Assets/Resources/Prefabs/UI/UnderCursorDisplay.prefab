@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61243397035712742}
   m_Layer: 5
   m_Name: UnderCursorDisplay
-  m_TagString: Untagged
+  m_TagString: UnderCursorDisplay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8445fad0bb1a448469324cc519480147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overUI: 0
 --- !u!114 &114896189588587638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,8 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.25882354}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6156863}
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

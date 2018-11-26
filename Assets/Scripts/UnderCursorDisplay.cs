@@ -9,7 +9,6 @@ public class UnderCursorDisplay : MonoBehaviour {
 	Image heldItemImage;
 	Sprite[] itemIcons;
 	Sprite nullIcon;
-	Camera cam = null;
 	GameObject root;
 	public bool overUI = false;
 
@@ -17,7 +16,6 @@ public class UnderCursorDisplay : MonoBehaviour {
 		itemIcons = Resources.LoadAll<Sprite>("Sprites/InventoryIcons");
 		heldItemImage = transform.Find("HeldItemImage").gameObject.GetComponent<Image>();
 		nullIcon = Resources.Load<Sprite>("Sprites/ui_null_icon");
-		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		root = GameObject.FindGameObjectWithTag("Canvas");
 	}
 
@@ -36,13 +34,9 @@ public class UnderCursorDisplay : MonoBehaviour {
 
 	bool CheckUICollision(){
 		GraphicRaycaster gr = root.GetComponent<GraphicRaycaster>();
-		//Create the PointerEventData with null for the EventSystem
 		PointerEventData ped = new PointerEventData(null);
-		//Set required parameters, in this case, mouse position
 		ped.position = Input.mousePosition;
-		//Create list to receive all results
 		List<RaycastResult> results = new List<RaycastResult>();
-		//Raycast it
 		gr.Raycast(ped, results);
 
 		return results.Count > 0;

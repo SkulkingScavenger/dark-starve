@@ -311,7 +311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdda1c0008cef87418d4547cb344d591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInventoryShown: 0
   underCursorDisplay: {fileID: 0}
+  mainCamera: {fileID: 0}
+  player: {fileID: 0}
+  itemIcons: []
+  nullIcon: {fileID: 0}
 --- !u!1 &408779835
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,20 +520,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114201587241880958, guid: 393d8fc21c2ca5f4caa130fcda70ce35,
-        type: 2}
-      propertyPath: overUI
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114896189588587638, guid: 393d8fc21c2ca5f4caa130fcda70ce35,
-        type: 2}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1082121430837004, guid: 393d8fc21c2ca5f4caa130fcda70ce35, type: 2}
-      propertyPath: m_TagString
-      value: UnderCursorDisplay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 393d8fc21c2ca5f4caa130fcda70ce35, type: 2}

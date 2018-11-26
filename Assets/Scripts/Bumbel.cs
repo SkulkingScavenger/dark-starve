@@ -6,8 +6,6 @@ using UnityEngine.Networking;
 public class Bumbel : NetworkBehaviour {
 	float speedX = 0;
 	float speedY = 0;
-	float frictionForceX = 50f;
-	float frictionForceY = 50f;
 	public float spd = 5f;
 	public float dir = 0;
 

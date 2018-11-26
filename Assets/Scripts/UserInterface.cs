@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UserInterface : MonoBehaviour {
-	int quickSlotCount = 6;
-	int packSlotCount = 12;
-	int equipSlotCount = 4;
 	public bool isInventoryShown = false;
 	float inputPrevious = 0;
 	float input = 0;
@@ -60,7 +57,7 @@ public class UserInterface : MonoBehaviour {
 		GameObject quickSlotBar = Instantiate(Resources.Load<GameObject>("Prefabs/UI/InventoryPanel"));
 		quickSlotBar.transform.SetParent(transform,false);
 		quickSlotBar.transform.localPosition = quickSlotPosition;
-		for(int i = 0; i < quickSlotCount; i++){
+		for(int i = 0; i < player.quickSlot.maxSize; i++){
 			GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/UI/ItemSlot"));
 			bumbel.transform.SetParent(quickSlotBar.transform,false);
 			bumbel.transform.localPosition = new Vector3(i*slotWidth, 0, 0);
@@ -92,14 +89,16 @@ public class UserInterface : MonoBehaviour {
 			}
 
 			//Create Weapon Slot
-			GameObject weaponSlot = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIWeaponSlot"));
+			GameObject weaponSlot = Instantiate(Resources.Load<GameObject>("Prefabs/UI/ItemSlot"));
+			weaponSlot.GetComponent<Image>().sprite = Instantiate(Resources.Load<Sprite>("Sprites/weapon_slot"));
 			weaponSlot.transform.SetParent(inventoryOverlay.transform,false);
 			weaponSlot.transform.localPosition = weaponSlotPosition;
 			weaponSlot.GetComponent<ItemSlot>().root = this;
 			weaponSlot.GetComponent<ItemSlot>().targetInventory = player.weaponSlot;
 
 			//Create Light Slot
-			GameObject lightSlot = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UILightSlot"));
+			GameObject lightSlot = Instantiate(Resources.Load<GameObject>("Prefabs/UI/ItemSlot"));
+			lightSlot.GetComponent<Image>().sprite = Instantiate(Resources.Load<Sprite>("Sprites/light_slot"));
 			lightSlot.transform.SetParent(inventoryOverlay.transform,false);
 			lightSlot.transform.localPosition = lightSlotPosition;
 			lightSlot.GetComponent<ItemSlot>().root = this;
