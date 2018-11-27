@@ -39,13 +39,24 @@ public class ItemPrototypeManager : MonoBehaviour{
 		bumbel.craftable = true;
 		bumbel.consumptionBehaviour = ConsumptionBehaviour.consumable;
 		bumbel.use = (Player p, Item item) => {
+			Debug.Log("USED WOOD");
+		};
+		prototypes.Add(bumbel);
+
+		bumbel = new ItemPrototype();
+		bumbel.name = "Campfire Schematic";
+		bumbel.iconIndex = 6;
+		bumbel.maxStackCount = 10;
+		bumbel.craftable = true;
+		bumbel.consumptionBehaviour = ConsumptionBehaviour.consumable;
+		bumbel.use = (Player p, Item item) => {
 			Debug.Log(p.backpack.maxSize);
 		};
 		prototypes.Add(bumbel);
 
 	}
 
-	public void func(Player p, Item item){
+	public void useBuildingSchematic(Player p, Item item){
 		Debug.Log("USED OIL");
 	}
 
