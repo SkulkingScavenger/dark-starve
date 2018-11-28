@@ -42,6 +42,10 @@ public class UnderCursorDisplay : MonoBehaviour {
 		return results.Count > 0;
 	}
 
+	public void DisplayConstructionPreview(){
+		if(true){
 
+		}
+	}
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemPrototypeManager : MonoBehaviour{
 	public List<ItemPrototype> prototypes = new List<ItemPrototype>();
+	public List<StructurePrototype> structurePrototypes = new List<StructurePrototype>();
 	public static ItemPrototypeManager Instance { get; private set; }
 
 	void Awake (){
@@ -50,9 +51,17 @@ public class ItemPrototypeManager : MonoBehaviour{
 		bumbel.craftable = true;
 		bumbel.consumptionBehaviour = ConsumptionBehaviour.consumable;
 		bumbel.use = (Player p, Item item) => {
-			Debug.Log(p.backpack.maxSize);
+			UnderCursorDisplay underCursorDisplay = GameObject.FindGameObjectWithTag("UnderCursorDisplay").GetComponent<UnderCursorDisplay>();
+			underCursorDisplay.
 		};
 		prototypes.Add(bumbel);
+
+
+
+
+		StructurePrototype structurePrototype;
+		structurePrototype = new StructurePrototype();
+		structurePrototype.sprite = Resources.Load<Sprite>("Sprites/firepit");
 
 	}
 
