@@ -52,7 +52,7 @@ public class ItemPrototypeManager : MonoBehaviour{
 		bumbel.consumptionBehaviour = ConsumptionBehaviour.consumable;
 		bumbel.use = (Player p, Item item) => {
 			UnderCursorDisplay underCursorDisplay = GameObject.FindGameObjectWithTag("UnderCursorDisplay").GetComponent<UnderCursorDisplay>();
-			underCursorDisplay.
+			underCursorDisplay.structure = structurePrototypes[0];
 		};
 		prototypes.Add(bumbel);
 
@@ -62,6 +62,9 @@ public class ItemPrototypeManager : MonoBehaviour{
 		StructurePrototype structurePrototype;
 		structurePrototype = new StructurePrototype();
 		structurePrototype.sprite = Resources.Load<Sprite>("Sprites/firepit");
+		structurePrototype.size = 2;
+		structurePrototype.name = "firepit";
+		structurePrototypes.Add(structurePrototype);
 
 	}
 

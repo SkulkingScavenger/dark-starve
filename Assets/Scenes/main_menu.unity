@@ -547,6 +547,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 20545272451491330, guid: 7ee0f49b72320c74291e5b198b5db715,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2577
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ee0f49b72320c74291e5b198b5db715, type: 2}
   m_IsPrefabAsset: 0

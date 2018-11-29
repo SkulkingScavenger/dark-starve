@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4901108410301516}
   - component: {fileID: 108335100340812070}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4953276706714046}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: firepit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4652659126844602}
   - component: {fileID: 212877863121322934}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

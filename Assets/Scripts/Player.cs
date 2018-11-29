@@ -37,7 +37,7 @@ public class Player : NetworkBehaviour {
 		backpack.Add(bumbel);
 
 		bumbel = new Item();
-		bumbel.itemId = 0;
+		bumbel.itemId = 2;
 		backpack.Add(bumbel,2);
 
 		GameObject.FindGameObjectWithTag("Canvas").GetComponent<UserInterface>().Init(this);
@@ -193,11 +193,20 @@ void KeyboardMovement(){
 }
 
 void Action(){
-	if(Input.GetAxis("Fire1") != 0 && !cursorHandler.overUI){
-		GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Projectiles/bumbel"));
-		bumbel.GetComponent<Bumbel>().spd = 5;
-		bumbel.GetComponent<Bumbel>().dir = faceDirection;
-		bumbel.transform.position = transform.position;
+	if(Input.GetAxis("Fire1") != 0){
+		if(cursorHandler.structure != null){
+			GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/firepit"));
+			Vector3 mouseCoordinates = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamera.nearClipPlane));
+			mouseCoordinates.x = Mathf.Round(mouseCoordinates.x*2)/2f;
+			mouseCoordinates.y = Mathf.Round(mouseCoordinates.y*2)/2f;
+			bumbel.transform.position = new Vector3(mouseCoordinates.x, mouseCoordinates.y,-0.5f);
+			cursorHandler.structure = null;
+		}else if(!cursorHandler.overUI){
+			GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Projectiles/bumbel"));
+			bumbel.GetComponent<Bumbel>().spd = 5;
+			bumbel.GetComponent<Bumbel>().dir = faceDirection;
+			bumbel.transform.position = transform.position;
+		}
 	}
 }
 

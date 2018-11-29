@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,18 +11,20 @@ public class UnderCursorDisplay : MonoBehaviour {
 	Sprite[] itemIcons;
 	Sprite nullIcon;
 	GameObject root;
+	Camera cam;
 	public bool overUI = false;
 
-	StructurePrototype structure = null;
+	public StructurePrototype structure = null;
 	StructurePrototype structurePrevious = null;
 	GameObject constructionPreview = null;
-	int constructionPreviewCellWidth = 64;
+	float constructionPreviewCellWidth = (1/128f)*64.0f;
 
 	void Awake(){
 		itemIcons = Resources.LoadAll<Sprite>("Sprites/InventoryIcons");
 		heldItemImage = transform.Find("HeldItemImage").gameObject.GetComponent<Image>();
 		nullIcon = Resources.Load<Sprite>("Sprites/ui_null_icon");
 		root = GameObject.FindGameObjectWithTag("Canvas");
+		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
 	void Update(){
@@ -36,13 +39,15 @@ public class UnderCursorDisplay : MonoBehaviour {
 		}
 		overUI = CheckUICollision();
 
-
 		if(structure != structurePrevious){
 			DisplayConstructionPreview();
 		}
 		structurePrevious = structure;
 		if(constructionPreview != null){
-			constructionPreview.transform.position = new Vector3(transform.position.x,transform.position.y,-8);
+			Vector3 mouseCoordinates = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.nearClipPlane));
+			mouseCoordinates.x = Mathf.Round(mouseCoordinates.x*2)/2f;
+			mouseCoordinates.y = Mathf.Round(mouseCoordinates.y*2)/2f;
+			constructionPreview.transform.position = new Vector3(mouseCoordinates.x, mouseCoordinates.y,-8);
 		}
 	}
 
@@ -59,19 +64,22 @@ public class UnderCursorDisplay : MonoBehaviour {
 	public void DisplayConstructionPreview(){
 		if(constructionPreview != null){
 			Destroy(constructionPreview);
+			constructionPreview = null;
 		}
-		constructionPreview = Instantiate(Resources.Load<GameObject>("Prefabs/UI/ConstructionPreview"));
-		constructionPreview.GetComponent<SpriteRenderer>().sprite = structure.sprite;
-		GameObject gridCell = constructionPreview.transform.Find("GridCell").gameObject;
-		GameObject bumbel;
-		for(int i=0;i<structure.size;i++){
-			for(int j=0;j<structure.size;j++){
-				bumbel = Instantiate(gridCell);
-				bumbel.transform.SetParent(constructionPreview.transform);
-				bumbel.transform.localPosition = new Vector3((Decimal.Divide(structure.size-1,2) + i)*constructionPreviewCellWidth, (Decimal.Divide(structure.size-1,2) + j)*constructionPreviewCellWidth,0);
+		if(structure != null){
+			constructionPreview = Instantiate(Resources.Load<GameObject>("Prefabs/UI/ConstructionPreview"));
+			constructionPreview.transform.Find("BuildingSprite").gameObject.GetComponent<SpriteRenderer>().sprite = structure.sprite;
+			GameObject gridCell = constructionPreview.transform.Find("GridCell").gameObject;
+			GameObject bumbel;
+			for(int i=0;i<structure.size;i++){
+				for(int j=0;j<structure.size;j++){
+					bumbel = Instantiate(gridCell);
+					bumbel.transform.SetParent(constructionPreview.transform);
+					float w = (structure.size-1)*-0.5f;
+					bumbel.transform.localPosition = new Vector3((w + i)*constructionPreviewCellWidth, (w + j)*constructionPreviewCellWidth,0f);
+				}
 			}
+			Destroy(gridCell);
 		}
-		Destroy(gridCell);
 	}
-
 }
