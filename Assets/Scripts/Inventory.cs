@@ -77,6 +77,18 @@ public class Inventory {
 		return contents[index];
 	}
 
+
+	public int this[int index]{
+		get{
+			return Get(index);
+		}
+		set{
+			Add(value,index);
+		}
+	}
+
+
+
 	List<int> FindById(int id){
 		List<int> output = new List<int>();
 		for(int i=0;i<maxSize;i++){

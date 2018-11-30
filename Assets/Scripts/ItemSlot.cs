@@ -34,19 +34,19 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler {
 		UnderCursorDisplay cursorHandler = root.underCursorDisplay.GetComponent<UnderCursorDisplay>();
 		if (eventData.button == PointerEventData.InputButton.Left){
 			if(targetInventory.Get(index) != null){
-				if(cursorHandler.heldItem == null){
-					cursorHandler.heldItem = targetInventory.Get(index);
+				if(cursorHandler.heldItem[0] == null){
+					cursorHandler.heldItem[0] = targetInventory.Get(index);
 					targetInventory.Add(null,index);
 				}else{
-					cursorHandler.heldItem = targetInventory.Add(cursorHandler.heldItem,index);
+					cursorHandler.heldItem[0] = targetInventory.Add(cursorHandler.heldItem[0],index);
 				}
 			}else{
-				if(cursorHandler.heldItem != null){
-					cursorHandler.heldItem = targetInventory.Add(cursorHandler.heldItem,index);
+				if(cursorHandler.heldItem[0] != null){
+					cursorHandler.heldItem[0] = targetInventory.Add(cursorHandler.heldItem[0],index);
 				}
 			}
 		}else if (eventData.button == PointerEventData.InputButton.Right){
-			if(cursorHandler.heldItem != null){
+			if(cursorHandler.heldItem[0] != null){
 				if(root.isInventoryShown){
 					root.ToggleInventory();
 				}

@@ -202,10 +202,21 @@ void Action(){
 			bumbel.transform.position = new Vector3(mouseCoordinates.x, mouseCoordinates.y,-0.5f);
 			cursorHandler.structure = null;
 		}else if(!cursorHandler.overUI){
+			if(cursorHandler.heldItem[0] != null){
+				
+			}
 			GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Projectiles/bumbel"));
 			bumbel.GetComponent<Bumbel>().spd = 5;
 			bumbel.GetComponent<Bumbel>().dir = faceDirection;
 			bumbel.transform.position = transform.position;
+		}
+	}
+	if(Input.GetAxis("Fire2") != 0){
+		if(cursorHandler.structure != null){
+			cursorHandler.structure = null;
+
+		}else if(cursorHandler.heldItem[0] != null){
+			cursorHandler.heldItem[0].UseFromInventory(this,cursorHandler.heldItem,0);
 		}
 	}
 }
