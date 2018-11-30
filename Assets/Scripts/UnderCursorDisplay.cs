@@ -6,7 +6,10 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class UnderCursorDisplay : MonoBehaviour {
-	public Inventory heldItem = new Inventory(1);
+	public Inventory heldItemSlot = new Inventory(1);
+	public Inventory itemUsedFromInventory = null;
+	public int itemUsedFromIndex = -1;
+	public Item heldItem { get{ return heldItemSlot[0]; } set{ heldItemSlot.Add(value,0); } }
 	Image heldItemImage;
 	Sprite[] itemIcons;
 	Sprite nullIcon;
@@ -30,8 +33,8 @@ public class UnderCursorDisplay : MonoBehaviour {
 	void Update(){
 		transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 		transform.SetAsLastSibling();
-		if(heldItem[0] != null){
-			heldItemImage.sprite = itemIcons[heldItem[0].Prototype().iconIndex];
+		if(heldItem != null){
+			heldItemImage.sprite = itemIcons[heldItem.Prototype().iconIndex];
 			transform.Find("HeldItemImage").localPosition = new Vector3(0,0,0);
 		}else{
 			heldItemImage.sprite = nullIcon;

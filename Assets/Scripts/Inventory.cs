@@ -78,7 +78,7 @@ public class Inventory {
 	}
 
 
-	public int this[int index]{
+	public Item this[int index]{
 		get{
 			return Get(index);
 		}
@@ -104,19 +104,26 @@ public class Item {
 	public int itemId = 0;
 	public int stackCount = 1;
 	public int ammunitionId = 0;
+	public bool inUse = false;
 
 
 	public ItemPrototype Prototype(){
 		return ItemPrototypeManager.Instance.prototypes[itemId];
 	}
 
-	public void UseOnObject(Player p, Item item){
-		Prototype().UseItem(p,item);
-	}
+	// public void UseOnObject(Player p, Item item){
+	// 	Prototype().UseItem(p,item);
+	// }
 
 	public void UseFromInventory(Player p, Inventory container, int index){
-		Prototype().UseItem(p,container.Get(index));
+		Prototype().Use(p,container,index);
+	}
 
+	public void Callback(Player p, Inventory inventory, int index, bool success){
+		Prototype().Callback(p,inventory,index,success);
+	}
+
+	public void Decrement(Inventory container, int index){
 		switch(Prototype().consumptionBehaviour){
 		case ConsumptionBehaviour.consumable:
 			stackCount--;
@@ -146,11 +153,9 @@ public class ItemPrototype {
 	public bool craftable = false;
 	public ConsumptionBehaviour consumptionBehaviour = ConsumptionBehaviour.nonconsumable;
 
-	public delegate void DelegateFunc(Player p, Item item);
+	public delegate void DelegateFunc(Player p, Inventory inventory, int index);
+	public delegate void DelegateCallbackFunc(Player p, Inventory inventory, int index, bool success);
 
-	public DelegateFunc use;
-
-	public void UseItem(Player p, Item item){
-		use(p, item);
-	}
+	public DelegateFunc Use;
+	public DelegateCallbackFunc Callback = null;
 }

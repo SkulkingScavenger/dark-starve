@@ -195,14 +195,9 @@ void KeyboardMovement(){
 void Action(){
 	if(Input.GetAxis("Fire1") != 0){
 		if(cursorHandler.structure != null){
-			GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/firepit"));
-			Vector3 mouseCoordinates = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamera.nearClipPlane));
-			mouseCoordinates.x = Mathf.Round(mouseCoordinates.x*2)/2f;
-			mouseCoordinates.y = Mathf.Round(mouseCoordinates.y*2)/2f;
-			bumbel.transform.position = new Vector3(mouseCoordinates.x, mouseCoordinates.y,-0.5f);
-			cursorHandler.structure = null;
+			cursorHandler.itemUsedFromInventory.Get(cursorHandler.itemUsedFromIndex).Callback(this,cursorHandler.itemUsedFromInventory,cursorHandler.itemUsedFromIndex,true);
 		}else if(!cursorHandler.overUI){
-			if(cursorHandler.heldItem[0] != null){
+			if(cursorHandler.heldItem != null){
 				
 			}
 			GameObject bumbel = Instantiate(Resources.Load<GameObject>("Prefabs/Projectiles/bumbel"));
@@ -214,9 +209,9 @@ void Action(){
 	if(Input.GetAxis("Fire2") != 0){
 		if(cursorHandler.structure != null){
 			cursorHandler.structure = null;
-
-		}else if(cursorHandler.heldItem[0] != null){
-			cursorHandler.heldItem[0].UseFromInventory(this,cursorHandler.heldItem,0);
+			cursorHandler.itemUsedFromInventory.Get(cursorHandler.itemUsedFromIndex).Callback(this,cursorHandler.itemUsedFromInventory,cursorHandler.itemUsedFromIndex,false);
+		}else if(cursorHandler.heldItem != null){
+			cursorHandler.heldItem.UseFromInventory(this,cursorHandler.heldItemSlot,0);
 		}
 	}
 }

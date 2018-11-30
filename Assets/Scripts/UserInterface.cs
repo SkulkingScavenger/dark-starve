@@ -131,10 +131,5 @@ public class UserInterface : MonoBehaviour {
 		isInventoryShown = !isInventoryShown;
 	}
 
-
-	void PackSlotClick(int index){
-
-		Debug.Log(index);
-	}
 }
 
