@@ -7,3 +7,5 @@ that use lighting as a signature mechanic. Some kind of roguelike survival adven
 watch out for the skrack.
 
 check out <a href="https://github.com/SkulkingScavenger/dark-starve/wiki">The Wiki</a> if you want the fluff
+
+check out <a href="https://skulkingscavenger.github.io/dark-starve/#!/">The Website</a> if you want to see some of the random trash I host here for reasons
