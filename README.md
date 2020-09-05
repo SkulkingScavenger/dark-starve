@@ -10,4 +10,4 @@ watch out for the skrack.
 
 check out <a href="https://github.com/SkulkingScavenger/dark-starve/wiki">The Wiki</a> if you want the fluff
 
-check out <a href="https://skulkingscavenger.github.io/dark-starve/#!/">The Website</a> if you want to see even more random trash I host here for reasons
+check out <a href="https://skulkingscavenger.github.io/nine-candles-prophecy/home">The Website</a> if you want to see ~~even more random trash I host here for reasons~~ the full Dark-Starve experience!
